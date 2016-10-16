@@ -8,6 +8,7 @@ import Loader from 'angular-ecmascript/module-loader'
 import { Meteor } from 'meteor/meteor';
  
 import ChatsCtrl from '../controllers/chats.controller';
+import CalendarFilter from '../filters/calendar.filter';
 import RoutesConfig from '../routes';
  
 const App = 'ENIGMA';
@@ -19,6 +20,7 @@ Angular.module(App, [
 
 new Loader(App)
 	.load(ChatsCtrl)
+	.load(CalendarFilter)
 	.load(RoutesConfig)
 
 if (Meteor.isCordova) {
