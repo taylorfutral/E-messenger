@@ -3,18 +3,18 @@
 import { Controller } from 'angular-ecmascript/module-helpers';
 import { Chats } from '../../../lib/collections';
  
-export default class ChatsCtrl extends Controller {
+export default class ChatCtrl extends Controller {
   constructor() {
     super(...arguments);
  
+    this.chatId = this.$stateParams.chatId;
+ 
     this.helpers({
       data() {
-        return Chats.find();
+        return Chats.findOne(this.chatId);
       }
     });
   }
- 
-  remove(chat) {
-    Chats.remove(chat._id);
-  }
 }
+ 
+ChatCtrl.$inject = ['$stateParams'];
