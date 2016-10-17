@@ -1,6 +1,5 @@
 // code adapted from: https://www.angular-meteor.com/tutorials/whatsapp/
 
-import Moment from 'moment';
 import { Controller } from 'angular-ecmascript/module-helpers';
 import { Chats } from '../../../lib/collections';
  
@@ -14,7 +13,7 @@ export default class ChatsCtrl extends Controller {
       }
     });
   }
-
+ 
   remove(chat) {
     this.data.remove(chat._id);
   }
