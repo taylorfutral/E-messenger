@@ -1,4 +1,4 @@
-// code adapted from : https://www.angular-meteor.com/tutorials/socially/
+// code adapted from: https://www.angular-meteor.com/tutorials/whatsapp/
 
 import { Config } from 'angular-ecmascript/module-helpers';
  
