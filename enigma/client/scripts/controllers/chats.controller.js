@@ -1,3 +1,5 @@
+// code adapted from : https://www.angular-meteor.com/tutorials/socially/
+
 import Moment from 'moment';
 import { Controller } from 'angular-ecmascript/module-helpers';
  

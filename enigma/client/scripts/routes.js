@@ -1,3 +1,5 @@
+// code adapted from : https://www.angular-meteor.com/tutorials/socially/
+
 import { Config } from 'angular-ecmascript/module-helpers';
  
 export default class RoutesConfig extends Config {

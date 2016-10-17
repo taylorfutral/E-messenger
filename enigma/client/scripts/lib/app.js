@@ -1,3 +1,5 @@
+// code adapted from : https://www.angular-meteor.com/tutorials/socially/
+
 import 'angular-animate';
 import 'angular-meteor';
 import 'angular-sanitize';
