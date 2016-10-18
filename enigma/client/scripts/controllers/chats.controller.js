@@ -8,7 +8,7 @@ export default class ChatsCtrl extends Controller {
     super(...arguments);
  
     this.helpers({
-      data() {
+      getChats() {
         return Chats.find();
       }
     });

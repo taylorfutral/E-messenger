@@ -39,23 +39,23 @@ Meteor.startup(function() {
   const chats = [
     {
       name: 'Ethan Gonzalez',
-      picture: 'https://randomuser.me/api/portraits/thumb/men/1.jpg'
+      picture: 'https://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif'
     },
     {
       name: 'Bryan Wallace',
-      picture: 'https://randomuser.me/api/portraits/thumb/lego/1.jpg'
+      picture: 'https://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif'
     },
     {
       name: 'Avery Stewart',
-      picture: 'https://randomuser.me/api/portraits/thumb/women/1.jpg'
+      picture: 'https://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif'
     },
     {
       name: 'Katie Peterson',
-      picture: 'https://randomuser.me/api/portraits/thumb/women/2.jpg'
+      picture: 'https://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif'
     },
     {
       name: 'Ray Edwards',
-      picture: 'https://randomuser.me/api/portraits/thumb/men/2.jpg'
+      picture: 'https://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif'
     }
   ];
  

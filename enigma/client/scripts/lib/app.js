@@ -2,6 +2,7 @@
 
 import 'angular-animate';
 import 'angular-meteor';
+import 'angular-moment';
 import 'angular-sanitize';
 import 'angular-ui-router';
 import 'ionic-scripts';
@@ -18,6 +19,7 @@ const App = 'ENIGMA';
  
 Angular.module(App, [
   'angular-meteor',
+  'angularMoment',
   'ionic'
 ]);
 
