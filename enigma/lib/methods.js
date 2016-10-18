@@ -7,7 +7,8 @@ Meteor.methods({
  
     const messageId = Messages.insert(message);
     Chats.update(message.chatId, { $set: { lastMessage: message } });
- 
+ 	console.log(Chats.find(message.chatId))
+
     return messageId;
   }
 });

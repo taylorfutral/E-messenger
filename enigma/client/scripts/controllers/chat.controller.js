@@ -18,6 +18,7 @@ export default class ChatCtrl extends Controller {
       }
     });
   }
+
   sendMessage(){
     if(_.isEmpty(this.message)) return;
     
