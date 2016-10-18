@@ -6,8 +6,8 @@ Meteor.methods({
     message.timestamp = new Date();
  
     const messageId = Messages.insert(message);
+    //FIXME, Chats.update is not working for users when using 'meteor mongo' on commmand line
     Chats.update(message.chatId, { $set: { lastMessage: message } });
- 	console.log(Chats.find(message.chatId))
 
     return messageId;
   }
