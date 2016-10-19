@@ -29,6 +29,7 @@ export default class RoutesConfig extends Config {
         }
       });
  
+    //Reroutes user to tab/chats
     this.$urlRouterProvider.otherwise('tab/chats');
   }
 }
