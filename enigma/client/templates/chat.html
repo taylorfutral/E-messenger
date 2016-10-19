@@ -12,7 +12,7 @@
         <div class="message" ng-class-even="'message-mine'" ng-class-odd="'message-other'">
         <!-- figure out who is logged in order to check who owns which message -->
           <div class="message-text">{{ message.text }}</div>
-          <span class="message-timestamp">{{ message.timestamp | amDateFormat: 'HH:MM' }}</span> </div>
+          <span class="message-timestamp">{{ message.timestamp | calendar }}</span> </div>
       </div>
     </div>
   </ion-content>
