@@ -9,6 +9,7 @@
   <ion-content class="chat">
     <div class="message-list"">
       <div ng-repeat="message in chat.messages" class="message-wrapper">
+	<!-- Every other message glitch on line below VVV -->
         <div class="message" ng-class-even="'message-mine'" ng-class-odd="'message-other'">
         <!-- figure out who is logged in order to check who owns which message -->
           <div class="message-text">{{ message.text }}</div>
