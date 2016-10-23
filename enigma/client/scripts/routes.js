@@ -1,8 +1,15 @@
 // code adapted from: https://www.angular-meteor.com/tutorials/whatsapp/
 
-import { Config } from 'angular-ecmascript/module-helpers';
+import { _ } from 'meteor/underscore';
+import { Meteor } from 'meteor/meteor';
+import { Config, Runner } from 'angular-ecmascript/module-helpers';
  
 export default class RoutesConfig extends Config {
+    constructor() {
+        super(...arguments);
+
+        this.isAuthorized = ['$auth', this.isAuthorized.bind(this)];
+    }
   configure() {
     this.$stateProvider
       .state('tab', {
@@ -27,11 +34,35 @@ export default class RoutesConfig extends Config {
             controller: 'ChatCtrl as chat'
           }
         }
-      });
- 
+      })
+        .state('login', {
+            url: '/login',
+            templateUrl: 'client/templates/login.html',
+            controller: 'LoginCtrl as logger'
+        });
+
     //Reroutes user to tab/chats
     this.$urlRouterProvider.otherwise('tab/chats');
   }
+    isAuthorized($auth) {
+        return $auth.awaitUser();
+    }
 }
  
 RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+
+class RoutesRunner extends Runner {
+    run() {
+        this.$rootScope.$on('$stateChangeError', (...args) => {
+            const err = _.last(args);
+
+            if (err === 'AUTH_REQUIRED') {
+                this.$state.go('login');
+            }
+        });
+    }
+}
+
+RoutesRunner.$inject = ['$rootScope', '$state'];
+
+export default [RoutesConfig, RoutesRunner];

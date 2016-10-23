@@ -2,6 +2,7 @@
 
 import 'angular-animate';
 import 'angular-meteor';
+import 'angular-meteor-auth';
 import 'angular-moment';
 import 'angular-sanitize';
 import 'angular-ui-router';
@@ -13,21 +14,24 @@ import { Meteor } from 'meteor/meteor';
 import ChatsCtrl from '../controllers/chats.controller';
 import ChatCtrl from '../controllers/chat.controller';
 import CalendarFilter from '../filters/calendar.filter';
-import RoutesConfig from '../routes';
+import LoginCtrl from '../controllers/login.controller';
+import Routes from '../routes';
  
 const App = 'ENIGMA';
  
 Angular.module(App, [
   'angular-meteor',
   'angularMoment',
+    'accounts.ui',
   'ionic'
 ]);
 
 new Loader(App)
 	.load(ChatsCtrl)
 	.load(ChatCtrl)
+    .load(LoginCtrl)
 	.load(CalendarFilter)
-	.load(RoutesConfig)
+	.load(Routes)
 
 if (Meteor.isCordova) {
   Angular.element(document).on('deviceready', onReady);
