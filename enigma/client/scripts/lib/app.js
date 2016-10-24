@@ -37,7 +37,6 @@ if (Meteor.isCordova) {
   Angular.element(document).on('deviceready', onReady);
 }
 else {
-  console.log(Meteor.userId())
   Angular.element(document).ready(onReady);
 }
  

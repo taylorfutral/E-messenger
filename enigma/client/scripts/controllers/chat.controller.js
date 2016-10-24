@@ -31,7 +31,6 @@ export default class ChatCtrl extends Controller {
       userId: Meteor.userId()
     });
 
-    console.log(Meteor.userId())
     delete this.message;
   }
 }
