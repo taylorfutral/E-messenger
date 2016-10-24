@@ -22,14 +22,14 @@ const App = 'ENIGMA';
 Angular.module(App, [
   'angular-meteor',
   'angularMoment',
-    'accounts.ui',
+  'accounts.ui',
   'ionic'
 ]);
 
 new Loader(App)
 	.load(ChatsCtrl)
 	.load(ChatCtrl)
-    .load(LoginCtrl)
+  .load(LoginCtrl)
 	.load(CalendarFilter)
 	.load(Routes)
 
@@ -37,6 +37,7 @@ if (Meteor.isCordova) {
   Angular.element(document).on('deviceready', onReady);
 }
 else {
+  console.log(Meteor.userId())
   Angular.element(document).ready(onReady);
 }
  

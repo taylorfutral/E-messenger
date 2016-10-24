@@ -2,6 +2,8 @@
 
 import { Controller } from 'angular-ecmascript/module-helpers';
 import { Chats, Messages } from '../../../lib/collections';
+import { Meteor } from 'meteor/meteor';
+
  
 export default class ChatCtrl extends Controller {
   constructor() {
@@ -25,9 +27,11 @@ export default class ChatCtrl extends Controller {
     this.callMethod('newMessage', {
       text: this.message,
       type: 'text',
-      chatId: this.chatId
+      chatId: this.chatId,
+      userId: Meteor.userId()
     });
 
+    console.log(Meteor.userId())
     delete this.message;
   }
 }
