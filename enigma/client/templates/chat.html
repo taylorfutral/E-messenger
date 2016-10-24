@@ -10,7 +10,7 @@
     <div class="message-list"">
       <div ng-repeat="message in chat.messages" class="message-wrapper">
 	<!-- Every other message glitch on line below VVV -->
-        <div class="message" ng-class="message.userId == Meteor.userId() ? 'message-other':'message-mine'">
+        <div class="message" ng-class="Meteor.userId() == message.userId ? 'message-other':'message-mine'">
         <!-- figure out who is logged in order to check who owns which message -->
           <div class="message-text">{{ message.text }}</div>
           <span class="message-timestamp">{{ message.timestamp | calendar }}</span> </div>
