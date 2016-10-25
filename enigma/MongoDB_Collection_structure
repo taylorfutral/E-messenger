@@ -1,4 +1,4 @@
-This file is to show the json structure in the MongoDB Collection.
+This file is to show the .json structure in the MongoDB Collection.
 
 Chats:
     1. last message
@@ -17,3 +17,4 @@ Message:
     4. userId -identically defined in Meteor, also used for account base
     5. timestamp
     6. other user's name
+    7. timer for each message
