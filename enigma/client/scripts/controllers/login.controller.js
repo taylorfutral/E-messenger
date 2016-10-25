@@ -10,4 +10,9 @@ Accounts.ui.config({
 
 //Login Controller class
 export default class LoginCtrl extends Controller {
+    login(){
+        console.log("login fn called");
+    }
 }
+
+LoginCtrl.$name = 'LoginCtrl';
