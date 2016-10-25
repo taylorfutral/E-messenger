@@ -1,12 +1,17 @@
 <!-- code adapted from: https://www.angular-meteor.com/tutorials/whatsapp/
  -->
 
-
 <ion-view title="ENIGMA - Login">
     <ion-content>
         <h2 style="margin-top: 40px;">Login using dotansimha:accounts-ui-angular</h2>
         <login-buttons style="z-index: 10;"></login-buttons>
         <button ng-click="logger.login()">Call Login fn</button>
+        <label class="item item-input">
+            <input type="text" placeholder="Username" ><!--ng-model="logger.username"-->
+        </label>
+        <label class="item item-input">
+            <input type="password" placeholder="Password" ><!--ng-model="logger.password"-->
+        </label>
+        {{currentUser}}
     </ion-content>
-
 </ion-view>

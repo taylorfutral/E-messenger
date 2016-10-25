@@ -29,7 +29,7 @@ Angular.module(App, [
 new Loader(App)
 	.load(ChatsCtrl)
 	.load(ChatCtrl)
-  .load(LoginCtrl)
+    .load(LoginCtrl)
 	.load(CalendarFilter)
 	.load(Routes)
 

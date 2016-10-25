@@ -12,6 +12,7 @@ Accounts.ui.config({
 export default class LoginCtrl extends Controller {
     login(){
         console.log("login fn called");
+        console.log("this.phone: " + this.phone)
     }
 }
 
