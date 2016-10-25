@@ -1,14 +1,13 @@
 This file is to show the .json structure in the MongoDB Collection.
 
 Chats:
-    1. last message
-    2. timestamp
+    1. chatId
+    2. last message - which is a json document itself
     3. account user
     4. other user 
     5. picture
     6. public key 1
     7. public key 2
-    8. chatId
 
 Message:
     1. message text
