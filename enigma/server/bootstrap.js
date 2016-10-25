@@ -43,7 +43,7 @@ Meteor.startup(function() {
     },
     {
       name: 'Bryan Wallace',
-      picture: 'https://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif'
+      picture: 'http://imgur.com/a/av9mZ'
     },
     {
       name: 'Avery Stewart',
