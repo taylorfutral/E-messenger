@@ -10,10 +10,11 @@ Chats:
     7. public key 2
 
 Message:
-    1. message text
-    2. type
-    3. chatId
-    4. userId -identically defined in Meteor, also used for account base
-    5. timestamp
-    6. other user's name
-    7. timer for each message
+    1. message id
+    2. message text
+    3. type
+    4. chatId
+    5. userId -identically defined in Meteor, also used for account base
+    6. timestamp
+    7. other user's name
+    8. timer for each message
