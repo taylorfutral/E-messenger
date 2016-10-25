@@ -1,0 +1,19 @@
+This file is to show the json structure in the MongoDB Collection.
+
+Chats:
+    1. last message
+    2. timestamp
+    3. account user
+    4. other user 
+    5. picture
+    6. public key 1
+    7. public key 2
+    8. chatId
+
+Message:
+    1. message text
+    2. type
+    3. chatId
+    4. userId -identically defined in Meteor, also used for account base
+    5. timestamp
+    6. other user's name
