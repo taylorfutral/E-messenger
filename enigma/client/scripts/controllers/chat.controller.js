@@ -35,4 +35,5 @@ export default class ChatCtrl extends Controller {
   }
 }
 
+ChatCtrl,$name = 'ChatCtrl';
 ChatCtrl.$inject = ['$stateParams'];

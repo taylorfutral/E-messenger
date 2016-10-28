@@ -51,7 +51,7 @@ Meteor.startup(function() {
     },
     {
       name: 'Katie Peterson',
-      picture: 'https://heatherchristenaschmidt.files.wordpress.com/2011/09/facebook_no_profile_pic2-jpg.gif'
+      picture: 'https://randomuser.me/api/portraits/thumb/men/1.jpg'
     },
     {
       name: 'Ray Edwards',
