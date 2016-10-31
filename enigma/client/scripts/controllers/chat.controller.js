@@ -6,11 +6,11 @@ import { Meteor } from 'meteor/meteor';
 
  
 export default class ChatCtrl extends Controller {
-  constructor() {
+  constructor($scope) {
     super(...arguments);
  
     this.chatId = this.$stateParams.chatId;
- 
+    this.timer = 0;
     this.timerFlag = false;
 
     this.helpers({
@@ -25,8 +25,6 @@ export default class ChatCtrl extends Controller {
 
   sendMessage(){
     if(_.isEmpty(this.message)) return;
-    
-    
 
     this.callMethod('newMessage', {
       text: this.message,
@@ -34,15 +32,18 @@ export default class ChatCtrl extends Controller {
       chatId: this.chatId,
       userId: Meteor.userId(),
       timestamp: new Date(),
-      timer: 0
+      timer: this.timer
       //other user's name?
     });
 
     delete this.message;
   }
 
+  timerSeconds(num){
+    this.timer = num;
+  }
+
   checkTimer(isSelected){
-    console.log(isSelected)
     this.timerFlag = isSelected;
   }
 }

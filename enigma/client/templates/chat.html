@@ -20,8 +20,30 @@
   <ion-footer-bar keyboard-attach class="bar-stable footer-chat ">
   <input ng-model="chat.message"
          type="text"/>
-  <button ng-click="chat.sendMessage()" class="button button-clear button-positive">Send</button>
   <ion-checkbox ng-model="isSelected" ng-click='chat.checkTimer(isSelected)'>Timer?</ion-checkbox>
+  <div class="timerDropdown">
+
+    <label class="item item-input item-select">
+      <div class="input-label">
+        Seconds
+      </div>
+      <select ng-model="time">
+        <option value="0" ng-selected="chat.timerSeconds(time)">No Timer</option>
+        <option value="1" ng-selected="chat.timerSeconds(time)">1</option>
+        <option value="2" ng-selected="chat.timerSeconds(time)">2</option>
+        <option value="3" ng-selected="chat.timerSeconds(time)">3</option>
+        <option value="4" ng-selected="chat.timerSeconds(time)">4</option>
+        <option value="5" ng-selected="chat.timerSeconds(time)">5</option>
+        <option value="6" ng-selected="chat.timerSeconds(time)">6</option>
+        <option value="7" ng-selected="chat.timerSeconds(time)">7</option>
+        <option value="8" ng-selected="chat.timerSeconds(time)">8</option>
+        <option value="9" ng-selected="chat.timerSeconds(time)">9</option>
+        <option value="10" ng-selected="chat.timerSeconds(time)">10</option>
+      </select>
+    </label>
+  </div>
+  <button ng-click="chat.sendMessage()" class="button button-clear button-positive">Send</button>
+
 
   </ion-footer-bar>
 </ion-view>
