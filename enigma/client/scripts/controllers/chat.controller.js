@@ -11,6 +11,8 @@ export default class ChatCtrl extends Controller {
  
     this.chatId = this.$stateParams.chatId;
  
+    this.timerFlag = false;
+
     this.helpers({
       messages(){
       	return Messages.find({ chatId: this.chatId });
@@ -24,14 +26,24 @@ export default class ChatCtrl extends Controller {
   sendMessage(){
     if(_.isEmpty(this.message)) return;
     
+    
+
     this.callMethod('newMessage', {
       text: this.message,
       type: 'text',
       chatId: this.chatId,
-      userId: Meteor.userId()
+      userId: Meteor.userId(),
+      timestamp: new Date(),
+      timer: 0
+      //other user's name?
     });
 
     delete this.message;
+  }
+
+  checkTimer(isSelected){
+    console.log(isSelected)
+    this.timerFlag = isSelected;
   }
 }
 

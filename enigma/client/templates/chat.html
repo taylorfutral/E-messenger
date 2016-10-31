@@ -21,6 +21,7 @@
   <input ng-model="chat.message"
          type="text"/>
   <button ng-click="chat.sendMessage()" class="button button-clear button-positive">Send</button>
+  <ion-checkbox ng-model="isSelected" ng-click='chat.checkTimer(isSelected)'>Timer?</ion-checkbox>
 
   </ion-footer-bar>
 </ion-view>
