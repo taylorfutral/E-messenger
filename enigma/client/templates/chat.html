@@ -19,7 +19,9 @@
   </ion-content>
   <ion-footer-bar keyboard-attach class="bar-stable footer-chat ">
   <input ng-model="chat.message"
-         type="text"/>
+         dir="auto"
+         type="text"
+         on-return="chat.sendMessage()";/>
 
 <!-- checkbox might not be necessary anymore ;) -->
 <!--   <ion-checkbox ng-model="isSelected" ng-click='chat.checkTimer(isSelected)'>Timer?</ion-checkbox>
@@ -29,7 +31,7 @@
       <div class="input-label">
         Seconds
       </div>
-      <select ng-model="time" class="dropdown_menu">
+      <select ng-model="time" ng-init="time=0" class="dropdown_menu">
         <option value="0">No Timer</option>
         <option value="1">1</option>
         <option value="2">2</option>
