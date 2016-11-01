@@ -1,3 +1,5 @@
+// code adapted from: https://www.angular-meteor.com/tutorials/whatsapp/
+
 import { Directive } from 'angular-ecmascript/module-helpers';
  
 export default class InputDirective extends Directive {
