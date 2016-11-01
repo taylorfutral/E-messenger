@@ -26,26 +26,29 @@ export default class ChatCtrl extends Controller {
   sendMessage(){
     if(_.isEmpty(this.message)) return;
 
+    console.log(this.$scope.time);
+
     this.callMethod('newMessage', {
       text: this.message,
       type: 'text',
       chatId: this.chatId,
       userId: Meteor.userId(),
       timestamp: new Date(),
-      timer: this.timer
+      timer: this.$scope.time
       //other user's name?
     });
 
     delete this.message;
   }
 
-  timerSeconds(num){
-    this.timer = num;
-  }
+  // helper methods are not too necessary now
+  // timerSeconds(num){
+  //   this.timer = num;
+  // }
 
-  checkTimer(isSelected){
-    this.timerFlag = isSelected;
-  }
+  // checkTimer(isSelected){
+  //   this.timerFlag = isSelected;
+  // }
 }
 
 ChatCtrl,$name = 'ChatCtrl';
