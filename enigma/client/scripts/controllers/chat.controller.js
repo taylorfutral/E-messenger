@@ -10,8 +10,8 @@ export default class ChatCtrl extends Controller {
     super(...arguments);
  
     this.chatId = this.$stateParams.chatId;
-    this.timer = 0;
-    this.timerFlag = false;
+
+    $scope.userId = Meteor.userId();
 
     this.helpers({
       messages(){
@@ -26,17 +26,18 @@ export default class ChatCtrl extends Controller {
   sendMessage(){
     if(_.isEmpty(this.message)) return;
 
-    console.log(this.$scope.time);
-
     this.callMethod('newMessage', {
       text: this.message,
       type: 'text',
       chatId: this.chatId,
       userId: Meteor.userId(),
       timestamp: new Date(),
-      timer: this.$scope.time
+      timer: this.$scope.timer
       //other user's name?
     });
+
+
+
 
     delete this.message;
   }

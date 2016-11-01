@@ -10,7 +10,7 @@
     <div class="message-list"">
       <div ng-repeat="message in chat.messages" class="message-wrapper">
 	<!-- Every other message glitch on line below VVV -->
-        <div class="message" ng-class="Meteor.userId() === message.userId ? 'message-other':'message-mine'">
+        <div class="message" ng-class="userId === message.userId ? 'message-mine' : 'message-other'">
         <!-- figure out who is logged in order to check who owns which message -->
           <div class="message-text">{{ message.text }}</div>
           <span class="message-timestamp">{{ message.timestamp | calendar }}</span> </div>
@@ -31,7 +31,7 @@
       <div class="input-label">
         Seconds
       </div>
-      <select ng-model="time" ng-init="time=0" class="dropdown_menu">
+      <select ng-model="timer" ng-init="timer=0" class="dropdown_menu">
         <option value="0">No Timer</option>
         <option value="1">1</option>
         <option value="2">2</option>
