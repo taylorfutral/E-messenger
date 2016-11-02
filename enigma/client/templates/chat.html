@@ -10,10 +10,12 @@
     <div class="message-list"">
       <div ng-repeat="message in chat.messages" class="message-wrapper">
 	<!-- Every other message glitch on line below VVV -->
-        <div class="message" ng-class="userId === message.userId ? 'message-mine' : 'message-other'">
+        <div class="message" ng-class="userId === message.userId ? 'message-mine' : 'message-other'" >
         <!-- figure out who is logged in order to check who owns which message -->
           <div class="message-text">{{ message.text }}</div>
           <span class="message-timestamp">{{ message.timestamp | calendar }}</span> </div>
+          <div class="delete_message" ng-if="chat.is_delete(message)">
+          <div ng-init="chat.delayed_delete(message)">This message is marked for deletion.</div></div>
       </div>
     </div>
   </ion-content>
@@ -37,8 +39,8 @@
         <option value="2">2</option>
         <option value="3">3</option>
         <option value="4">4</option>
-        <option value="6">6</option>
-        <option value="5">5</option>
+        <option value="6">5</option>
+        <option value="5">6</option>
         <option value="7">7</option>
         <option value="8">8</option>
         <option value="9">9</option>

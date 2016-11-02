@@ -36,11 +36,21 @@ export default class ChatCtrl extends Controller {
       //other user's name?
     });
 
-
-
-
     delete this.message;
   }
+
+  is_delete(message){
+    return message.timer > 0;
+  }
+
+  delayed_delete(message){
+    var time = message.timer * 1000;
+    Meteor.setTimeout(function() {
+      Messages.remove({ _id: message._id });
+    }, time);
+
+  }
+
 
   // helper methods are not too necessary now
   // timerSeconds(num){
