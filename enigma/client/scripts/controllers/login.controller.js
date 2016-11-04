@@ -23,9 +23,6 @@ export default class LoginCtrl extends Controller {
                 }
             }
         );
-        setTimeout(function() {
-            console.log("Meteor.user: " + Meteor.user());
-            }, 1000);
         //redirect to tab/chats
         //this.$state.go('tab.chats');
     }
@@ -48,11 +45,9 @@ export default class LoginCtrl extends Controller {
             } else {//success
             }
         });
-        console.log("Meteor.user: " + Meteor.user());
         //redirect to profile page
         //this.$state.go('profile');
     }
-    checkUser(){ console.log(Meteor.user()); }
 }
 
 LoginCtrl.$name = 'LoginCtrl';
