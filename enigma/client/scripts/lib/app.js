@@ -21,19 +21,20 @@ import Routes from '../routes';
 const App = 'ENIGMA';
  
 Angular.module(App, [
-  'angular-meteor',
-  'angularMoment',
-  'accounts.ui',
-  'ionic'
+    'angular-meteor',
+    'angular-meteor.auth',
+    'angularMoment',
+    'accounts.ui',
+    'ionic'
 ]);
 
 new Loader(App)
 	.load(ChatsCtrl)
 	.load(ChatCtrl)
-  .load(InputDirective)
-  .load(LoginCtrl)
+    .load(InputDirective)
+    .load(LoginCtrl)
 	.load(CalendarFilter)
-	.load(Routes)
+	.load(Routes);
 
 if (Meteor.isCordova) {
   Angular.element(document).on('deviceready', onReady);

@@ -7,11 +7,16 @@
         <login-buttons style="z-index: 10;"></login-buttons>
         <button ng-click="logger.login()">Call Login fn</button>
         <label class="item item-input">
-            <input type="text" placeholder="Username" ><!--ng-model="logger.username"-->
+            <input type="email" placeholder="Email" ng-model="logger.email" >
         </label>
         <label class="item item-input">
-            <input type="password" placeholder="Password" ><!--ng-model="logger.password"-->
+            <input type="password" placeholder="Password" ng-model="logger.password" >
         </label>
+        <button ng-click="logger.login()">Login</button>
+        <button ng-click="logger.register()">Create Account</button>
         {{currentUser}}
+        <div ng-show="vm.isLoggingIn">Logging in...</div>
+        <div ng-show="currentUser">I am visible only for logged in users!</div>
+        <div ng-hide="currentUser">I am visible only for guests!</div>
     </ion-content>
 </ion-view>
