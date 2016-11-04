@@ -3,7 +3,7 @@ import { _ } from 'meteor/underscore';
 import { Accounts } from 'meteor/accounts-base';
 import { Controller } from 'angular-ecmascript/module-helpers';
 
-//Account Configuration
+//Account Configuration - will be removed
 Accounts.ui.config({
     passwordSignupFields: 'EMAIL_ONLY',
 });
@@ -15,11 +15,19 @@ export default class LoginCtrl extends Controller {
         console.log("login fn called");
         console.log("this.email: " + this.email);
         console.log("this.password: " + this.password);
-        Meteor.loginWithPassword(this.email, this.password);
-
-        console.log("Meteor.user: " + Meteor.user());
+        Meteor.loginWithPassword(this.email, this.password,
+            function(err){
+                if(err){//failure
+                    console.log(err.reason);
+                } else {//success
+                }
+            }
+        );
+        setTimeout(function() {
+            console.log("Meteor.user: " + Meteor.user());
+            }, 1000);
         //redirect to tab/chats
-        this.$state.go('tab.chats');
+        //this.$state.go('tab.chats');
     }
     register(){ //Create new user account
         if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
@@ -30,14 +38,21 @@ export default class LoginCtrl extends Controller {
             username: this.email,
             email: this.email,
             password: this.password,
+            createdAt: new Date(),
             profile: {
-                createdOn: new Date()
+                name: ''
+            }
+        }, function(err){
+            if(err){//failure
+                console.log(err.reason);
+            } else {//success
             }
         });
         console.log("Meteor.user: " + Meteor.user());
         //redirect to profile page
         //this.$state.go('profile');
     }
+    checkUser(){ console.log(Meteor.user()); }
 }
 
 LoginCtrl.$name = 'LoginCtrl';
