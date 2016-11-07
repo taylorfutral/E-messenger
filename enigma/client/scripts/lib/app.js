@@ -16,6 +16,7 @@ import ChatCtrl from '../controllers/chat.controller';
 import InputDirective from '../directives/input.directive';
 import CalendarFilter from '../filters/calendar.filter';
 import LoginCtrl from '../controllers/login.controller';
+import SearchCtrl from '../controllers/search.controller';
 import Routes from '../routes';
  
 const App = 'ENIGMA';
@@ -33,6 +34,7 @@ new Loader(App)
 	.load(ChatCtrl)
     .load(InputDirective)
     .load(LoginCtrl)
+    .load(SearchCtrl)
 	.load(CalendarFilter)
 	.load(Routes);
 

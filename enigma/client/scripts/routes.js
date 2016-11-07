@@ -39,6 +39,11 @@ export default class RoutesConfig extends Config {
             url: '/login',
             templateUrl: 'client/templates/login.html',
             controller: 'LoginCtrl as logger'
+        })
+        .state('search', {
+            url: '/search',
+            templateUrl: 'client/templates/search.html',
+            controller: 'SearchCtrl as search'
         });
 
     //Reroutes user to tab/chats
