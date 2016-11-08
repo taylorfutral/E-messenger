@@ -1,0 +1,328 @@
+<html>
+
+<head>
+<title>Input</title>
+
+<script language="JavaScript">
+//I'VE TESTED THIS ON SOME INPUT AND IT WORKED BUT LET ME KNOW IF YOU FIND ANY ERRORS. YOU CAN JUST USE THE INPUT FORM
+//TO TRY RANDOM NUMBERS AND USE ONLINE CALCULATORS OR SOMETHING TO SEE IF IT'S CORRECT. IF IT'S NOT CORRECT JUST LET ME KNOW
+//AND I'LL TRY TO FIX IT.
+
+
+
+//this function computes the greatest common divisor which is needed in 
+//the other function rel_prime
+function gcd (a, b) {
+  var r;
+
+  while (b>0) {
+    r=a%b;
+    a=b;
+    b=r;
+  }
+  return a;
+}
+
+//this function computes part of the public key e where e is an integer such that 1 < e < φ(n) and gcd(e, φ(n)) = 1
+//where φ(n) = φ(p)φ(q) = (p − 1)(q − 1) = n − (p + q − 1), where φ is Euler's totient function. This value is part of the
+//public key where the public key is a 2-tuple (N,e). This value is needed for the message sender to ENCRYPT his message
+//to send to the other person.
+
+function rel_prime(phi){
+  var rel=5;
+   
+  while (gcd(phi,rel)!=1){
+    rel++;
+  }
+  return rel;
+}
+
+//this function literally just computes a^b the power of a to the b and it's needed in other functions.
+function power(a, b){
+  var temp=1, i;
+
+  for(i=1;i<=b;i++) {
+    temp*=a;
+  }
+  return temp;
+}
+
+
+//this function does the encryption operation which is defined mathematically as C = M^e (mod n) where M is the
+//message that is being encrypted and sent to another user. 
+function encrypt(N, e, M) {
+
+  var r, i=0, prod=1, rem_mod=0;
+
+  while (e>0) {
+    r = e % 2;
+
+    if (i++==0) {
+      rem_mod=M % N;
+    }
+    else{
+      rem_mod=power(rem_mod,2) % N;
+    }
+    if (r==1){
+      prod*=rem_mod;
+      prod=prod % N;
+    }
+    e=parseInt(e/2);
+  }
+  return prod;
+}
+
+//this function calculates the private key d which is defined mathematically by d ≡ e^−1 (mod φ(n))
+// i.e., d is the modular multiplicative inverse of e (modulo φ(n)).
+//this private key is necessary for the recipient of a message to decrypt a message M.
+//this value is only known by the recipient and nobody else for decyption purposes. 
+
+
+function calculate_d(phi,e){
+  var x, y, x1, x2, y1, y2, temp, r, prev_phi;
+  prev_phi = phi;
+
+  x2=1; x1=0; y2=0; y1=1;
+
+  while (e>0){
+    temp=parseInt(phi/e);
+    r=phi-temp*e;
+    x=x2-temp*x1;
+    y=y2-temp*y1;
+    phi=e;e=r;
+    x2=x1;x1=x;
+    y2=y1;y1=y;
+    if (phi==1){
+      y2+=prev_phi;
+      break;
+    }
+  }
+  return y2;
+}
+
+//this function does the decryption operation which is defined mathematically as C^d = (M^e)^d = M (mod n ) where M
+//is the original message sent and C is the encypted version of M. 
+
+function decrypt(c, d, N){
+  var r, i=0, prod=1, rem_mod=0;
+
+  while (d>0){
+    r=d % 2;
+    if (i++==0){
+      rem_mod=c % N;
+    }
+    else
+      rem_mod=power(rem_mod,2) % N;
+    if (r==1){
+      prod*=rem_mod;
+      prod=prod % N;
+    }
+    d=parseInt(d/2);
+  }
+  return prod;
+}
+
+//this is just to make a log function base 2. super simple.
+function log2(val) {
+  return Math.log(val) / Math.log(2);
+}
+
+//this is just to make a random integer from range min-max where max is excluded and min is included.
+function getRndInteger(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+//this function was needed to make modular exponentation efficient because a^b mod n is really slow.
+function mod_exponent(a, b, n) {
+  a = a % n;
+  var result = 1;
+  var x = a;
+
+  while(b > 0){
+    var leastSignificantBit = b % 2;
+    b = Math.floor(b / 2);
+
+    if (leastSignificantBit == 1) {
+      result = result * x;
+      result = result % n;
+    }
+
+    x = x * x;
+    x = x % n;
+  }
+  return result;
+}
+//this is some algorithm I found in my textbook that is used to test if a number is prime. It's kind of expensive 
+//to use so I looked up online and they said to eliminate some lower prime numbers first. Hence lowPrimes array. 
+function rabinMiller(n){
+  c = n-1;
+  t = 0;
+  while (c&1 ==0){
+    c = c/2;
+    t += 1;
+  }
+  k = 0;
+  while ( k < 128){
+    rand_int = getRndInteger(2, n-1);
+    //using normal built-in javascript operations a^s % n would be computationally infeasible
+    //so I had to look up online how to make an efficient modular exponentiation function and 
+    //I translated somebodies code from python into the mod_exponent(a,b,n) function that I use here
+    v = mod_exponent(a,s,n);
+    if v != 1{
+      i = 0;
+      while(v != (n-1)){
+        if i == t-1{
+          return false;
+        }
+        else{
+          i += 1;
+          v = mod_exponent(v,2,n);
+        }
+      }
+    }
+    k += 2;
+  }
+  return true;
+}
+//This function is used to test if a randomly generated number is a prime number with like a 99% chance accuracy. 
+//first it elminiates numbers with lower primes diviors then conducts the Rabin Miller algorithm. I got a lot of help from
+//the internet.
+function isPrime(n){
+  //low primes is all the primes below 1000. taking n modulo each lowPrime allows us to remove a huge chunk
+  //of composite numbers from our potential pool without resorting to Rabin-Miller
+  lowPrimes = [3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59,61,67,71,73,79,83,89,97
+                   ,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179
+                   ,181,191,193,197,199,211,223,227,229,233,239,241,251,257,263,269
+                   ,271,277,281,283,293,307,311,313,317,331,337,347,349,353,359,367
+                   ,373,379,383,389,397,401,409,419,421,431,433,439,443,449,457,461
+                   ,463,467,479,487,491,499,503,509,521,523,541,547,557,563,569,571
+                   ,577,587,593,599,601,607,613,617,619,631,641,643,647,653,659,661
+                   ,673,677,683,691,701,709,719,727,733,739,743,751,757,761,769,773
+                   ,787,797,809,811,821,823,827,829,839,853,857,859,863,877,881,883
+                   ,887,907,911,919,929,937,941,947,953,967,971,977,983,991,997]
+
+
+  if (n >= 3) {
+    if (n&1 != 0){
+      for (var i = 0; i < lowPrimes.length; i++) {
+        if (n == p){
+          return true;
+        }
+        if (n % p == 0){
+          return false;
+        }
+      }
+      return rabinMiller(n);
+    }
+  }
+
+  return false;
+}
+//This function will generate a prime number with the desired bit length (k) to an almost certain degree of accuracy. 
+//The internet and my textbook really helped with all this. This turned out to be really complicated. 
+function generateLargePrime(k){
+  //where k is the desired bit length
+  r = 100*(log2(k)+1); //number of attempts max
+  r_ = r;
+  while (r>0){
+    //the built-in math.random pseudo-random number generator I think is a mersenne twister 
+    //and is completely deterministic so it's unusable for serious crypto purposes. So idk if you want to change that.
+    //It's probably good enough but let me know. 
+    min_range = Math.pow(2,k-1);
+    max_range = Math.pow(2, k);
+    n = getRndInteger(min_range, max_range);
+    r -= 1;
+    if (isPrime(n) == true ) {
+      return n;
+    }
+    return "Failure after " + r_ + " tries."
+  } 
+}
+
+
+function openNew(){
+   
+
+//    var subWindow=window.open(
+// "Output.html", "Obj","HEIGHT=400,WIDTH=600,SCROLLBARS=YES");
+   document.write(get it inside bro);
+   var p = 53;  //parseInt(document.Input.p.value);
+   var q = 61;  //parseInt(document.Input.q.value);
+
+   var M = 999;  //parseInt(document.Input.M.value);
+
+   var N = p * q;
+   var phi = (p-1)*(q-1);
+
+   var e= rel_prime(phi);
+
+   var c=encrypt(N,e,M);
+   var d=calculate_d(phi,e);
+   var decrypted_message = decrypt(c, d, N);
+
+   
+   var random = Math.floor(Math.random() * 1000000000000000);
+   document.write(random);
+   document.write("\n");
+   var is_prime = isPrime(random);
+   document.write(is_prime);
+   document.write(p);
+   document.write("\n");
+   document.write(q);
+   document.write("\n");
+   document.write(M);
+   document.write("\n");
+   document.write(phi);
+   document.write("\n");
+   document.write(e);
+   document.write("\n");
+   document.write(c);
+   document.write("\n");
+   document.write(d);
+   document.write("\n");
+   document.write(decrypted_message);
+
+}
+
+// end scripting here -->
+</script>
+
+</head>
+
+<body>
+
+<p><font size="6">Input Form</font></p>
+<hr>
+<form name="Input">
+<table border="0" width="100%" height="109">
+  <tr>
+    <td width="24%" height="23">
+        <font color="#0000FF">Enter P</font></td>
+    <td width="76%" height="23">
+         <input type="text" name="p" size="20"></td>
+  </tr>
+  <tr>
+    <td width="24%" height="23"><font color="#0000FF">
+             Enter Q</font></td>
+    <td width="76%" height="23">
+          <input type="text" name="q" size="20"></td>
+  </tr>
+  <tr>
+    <td width="24%" height="20"> <font color="#0000FF">
+          Enter any Number ( M )</font> </td>
+    <td width="76%" height="20"> <input type="text" name="M" size="20">
+        <font size="1" color="#FF0000">(1-1000)</font></td>
+  </tr>
+  <tr>
+    <td width="24%" height="19"><input type="button" 
+         value="Submit" name="Submit" onClick="openNew()"></td>
+    <td width="76%" height="19"><input type="reset" 
+          value="Reset" name="Reset"></td>
+  </tr>
+</table>
+</form>
+<p>&nbsp;</p>
+
+</body>
+
+</html>
+
