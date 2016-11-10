@@ -37,7 +37,8 @@ export default class LoginCtrl extends Controller {
             password: this.password,
             createdAt: new Date(),
             profile: {
-                name: ''
+                name: '',
+                picture: ''
             }
         }, function(err){
             if(err){//failure
