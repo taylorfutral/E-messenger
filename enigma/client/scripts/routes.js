@@ -39,6 +39,15 @@ export default class RoutesConfig extends Config {
             url: '/login',
             templateUrl: 'client/templates/login.html',
             controller: 'LoginCtrl as logger'
+        })
+        .state('tab.settings',{
+            url: '/settings',
+            views: {
+                'tab-settings': {
+                    templateUrl: 'client/templates/settings.html',
+                    controller: 'SettingsCtrl as settings',
+                }
+            }
         });
 
     //Reroutes user to tab/chats
