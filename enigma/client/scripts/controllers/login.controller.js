@@ -16,10 +16,10 @@ export default class LoginCtrl extends Controller {
         console.log("this.email: " + this.email);
         console.log("this.password: " + this.password);
         Meteor.loginWithPassword(this.email, this.password,
-            function(err){
-                if(err){//failure
+            (err) => {
+                if (err) {
                     console.log(err.reason);
-                } else {//success
+                    return this.handleError(err);
                 }
             }
         );
@@ -28,9 +28,6 @@ export default class LoginCtrl extends Controller {
     }
     register(){ //Create new user account
         if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
-        console.log("register fn called");
-        console.log("this.email: " + this.email);
-        console.log("this.password: " + this.password);
         Accounts.createUser({
             username: this.email,
             email: this.email,
@@ -40,16 +37,25 @@ export default class LoginCtrl extends Controller {
                 name: '',
                 picture: ''
             }
-        }, function(err){
+        }, (err) => {
             if(err){//failure
-                console.log(err.reason);
+                return this.handleError(err);
             } else {//success
             }
         });
         //redirect to profile page
         //this.$state.go('profile');
     }
+    handleError(err){
+        this.$log.error('Login error ', err);
+
+        this.$ionicPopup.alert({
+            title: err.reason || 'Login failed',
+            template: 'Please try again',
+            okType: 'button-positive button-clear'
+        });
+    }
 }
 
 LoginCtrl.$name = 'LoginCtrl';
-LoginCtrl.$inject = ['$state', '$meteor'];
+LoginCtrl.$inject = ['$state', '$ionicLoading', '$ionicPopup', '$log'];

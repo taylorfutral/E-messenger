@@ -9,7 +9,7 @@ export default class SettingsCtrl extends Controller {
         })
     }
     profile(){ this.$state.go('profile'); }
-    handleError (err) {
+    handleError(err){
         this.$log.error('Settings modification error', err);
 
         this.$ionicPopup.alert({
