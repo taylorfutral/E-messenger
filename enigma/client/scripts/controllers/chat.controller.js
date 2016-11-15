@@ -26,8 +26,13 @@ export default class ChatCtrl extends Controller {
   sendMessage(){
     if(_.isEmpty(this.message)) return;
 
+    //FIXME: Going to need to convert this.message into an encrypted message
+    arr = this.convert_message_to_numarr(this.message);
+
+
     this.callMethod('newMessage', {
       text: this.message,
+      // encrypted_message: null,
       type: 'text',
       chatId: this.chatId,
       userId: Meteor.userId(),
@@ -51,15 +56,14 @@ export default class ChatCtrl extends Controller {
 
   }
 
+  convert_message_to_numarr(message){
+    arr = []
+    for(i = 0; i < message.length; i++){
+      arr.push(message.charCodeAt(i));
+    }
+    // String.fromCharCode(num); is the inverse
+  }
 
-  // helper methods are not too necessary now
-  // timerSeconds(num){
-  //   this.timer = num;
-  // }
-
-  // checkTimer(isSelected){
-  //   this.timerFlag = isSelected;
-  // }
 }
 
 ChatCtrl,$name = 'ChatCtrl';

@@ -11,7 +11,7 @@ export default class CalendarFilter extends Filter {
       lastDay : '[Yesterday]',
       sameDay : 'LT',
       lastWeek : 'dddd',
-      sameElse : 'DD/MM/YY'
+      sameElse : 'MM/DD/YY'
     });
   }
 }
