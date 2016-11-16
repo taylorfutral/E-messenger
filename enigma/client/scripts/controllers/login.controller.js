@@ -38,7 +38,7 @@ export default class LoginCtrl extends Controller {
             publicKey: [keys[0], keys[1]],
             privateKey: [keys[2]],
             //FIXME: we need some sort of link between this collection and the chats collection!
-            // say this is 'profile.name' for now?
+            // say this is 'profile.username' for now?
             profile: {
                 name: '',
                 picture: ''
