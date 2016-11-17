@@ -25,7 +25,6 @@ Angular.module(App, [
     'angular-meteor',
     'angular-meteor.auth',
     'angularMoment',
-    'accounts.ui',
     'ionic'
 ]);
 

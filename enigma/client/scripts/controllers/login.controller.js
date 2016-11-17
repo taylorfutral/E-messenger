@@ -3,18 +3,10 @@ import { _ } from 'meteor/underscore';
 import { Accounts } from 'meteor/accounts-base';
 import { Controller } from 'angular-ecmascript/module-helpers';
 
-//Account Configuration - will be removed
-Accounts.ui.config({
-    passwordSignupFields: 'EMAIL_ONLY',
-});
-
 //Login Controller class
 export default class LoginCtrl extends Controller {
     login(){ //Login in existing user account
         if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
-        console.log("login fn called");
-        console.log("this.email: " + this.email);
-        console.log("this.password: " + this.password);
         Meteor.loginWithPassword(this.email, this.password,
             (err) => {
                 if (err) {
@@ -24,7 +16,7 @@ export default class LoginCtrl extends Controller {
             }
         );
         //redirect to tab/chats
-        //this.$state.go('tab.chats');
+        this.$state.go('tab.chats');
     }
     register(){ //Create new user account
         if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
@@ -39,9 +31,16 @@ export default class LoginCtrl extends Controller {
             privateKey: [keys[2]],
             //FIXME: we need some sort of link between this collection and the chats collection!
             // say this is 'profile.username' for now?
+            //https://docs.meteor.com/api/accounts.html#Meteor-user
+            //Meteor.user() returns the current logged in user collection
+            //Meteor.user()._id accesses user id
+            //Meteor.user().username accesses username
+            //Meteor.user().profile.field accesses specified field in profile collection
             profile: {
-                name: '',
-                picture: ''
+                name: this.email,
+                picture: '',
+                //contact dictionary {(key,value)}
+                contacts: {}
             }
 
         }, (err) => {

@@ -1,9 +1,8 @@
 <!-- code adapted from: https://www.angular-meteor.com/tutorials/whatsapp/
  -->
 
-<ion-view title="ENIGMA - Login">
+<ion-view title="Login">
     <ion-content>
-        <login-buttons style="z-index: 10;"></login-buttons>
         <form>
             <label class="item item-input">
                 <input type="email" placeholder="Email" ng-model="logger.email" >
@@ -14,8 +13,7 @@
             <button ng-click="logger.login()">Login</button>
             <button ng-click="logger.register()">Create Account</button>
         </form>
-        {{currentUser}}
-        <div ng-show="currentUser">I am visible only for logged in users!</div>
-        <div ng-hide="currentUser">I am visible only for guests!</div>
+        <!--<div ng-show="currentUser">I am visible only for logged in users!</div>
+        <div ng-hide="currentUser">I am visible only for guests!</div> -->
     </ion-content>
 </ion-view>
