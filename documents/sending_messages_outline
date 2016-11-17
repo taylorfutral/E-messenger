@@ -1,0 +1,9 @@
+1. Create an Account for every user.
+2. In creating this account, generate the public and private keys.
+3. When a user wants to start a conversation, do a lookup in the 
+Accounts Collection using a key (probably username) and get their 
+public key.
+4. When sending a message, put the insert the encrypted text onto the 
+server.
+5. When outputting the texts on the UI, do a decrypt operator for every
+message. (using the public keys of both users)

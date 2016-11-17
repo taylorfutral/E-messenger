@@ -15,7 +15,27 @@ export default class ChatCtrl extends Controller {
 
     this.helpers({
       messages(){
+        m = Messages.find({chatId: this.chatId});
+        mine = [];
+        not_mine = [];
+        m.forEach(function(item){
+          if (item.userId == Meteor.userId()){
+            mine.push(item);
+          }else{
+            not_mine.push(item);
+          }
+        });
+
+        console.log(mine);
+        console.log(not_mine);
+
+
       	return Messages.find({ chatId: this.chatId });
+      },
+      print_message(){
+        // first find out who's message it is
+        // then find the correct userID
+        // then return the string decrypted with the correct private key
       },
       data() {
         return Chats.findOne(this.chatId);

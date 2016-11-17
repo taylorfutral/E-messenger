@@ -1,0 +1,7 @@
+1. Sprint 3 Report
+2. Test Plan
+3. Prototype Document
+4. Release 1.0 - make the user guide on the README.md
+5. Come up with tests and things to show the TAs during acceptance test
+6. Final Presentation ppt - we all need to work on this
+7. Project Reflection Essay
