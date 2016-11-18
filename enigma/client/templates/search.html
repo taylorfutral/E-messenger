@@ -1,12 +1,12 @@
 <ion-view title="ENIGMA - User Search">
     <ion-content>
     
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
         <form>
             <label class="item item-input">
                 <input type="text" placeholder="Search Users" ng-model="search.query" >
             </label>
-            <button class="btn btn-primary center-block" ng-click="search.findUsers()"><h2>Search</h2></button>
+            <button class="btn btn-primary btn-margin-top-10 center-block" ng-click="search.findUsers()">Search</button>
         </form>
         <table class="table table-hover">
             <thead ng-if="search.results.length != 0">
