@@ -9,5 +9,19 @@ Meteor.methods({
     Chats.update(message.chatId, { $set: { lastMessage: message } });
 
     return messageId;
+  },
+  userSearch(queryString) {
+    //simple search for users, currently searches usernames
+    var query = {
+      $where: "this.username.includes('"+queryString+"')"
+    };
+    var fields = { //limits what the search will return
+      username: 1,
+      emails: 1,
+      profile: 1
+    };
+    
+    var results = Meteor.users.find(query, {'fields': fields});
+    return results.fetch();
   }
 });

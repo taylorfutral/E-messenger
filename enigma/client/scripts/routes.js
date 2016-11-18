@@ -48,6 +48,11 @@ export default class RoutesConfig extends Config {
                     controller: 'SettingsCtrl as settings',
                 }
             }
+        })
+        .state('search', {
+            url: '/search',
+            templateUrl: 'client/templates/search.html',
+            controller: 'SearchCtrl as search'
         });
 
     //Reroutes user to tab/chats
