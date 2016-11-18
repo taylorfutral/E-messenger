@@ -5,8 +5,9 @@
 
   <ion-content>
      <ion-list>
-                                              <!-- VVV can use "ng-click="chats.*some_function()"" here -->
-      <i id="plus-btn" class="icon ion-plus-circled"> Start conversation</i>
+     <ion-item href="#/tab/search">
+      <i id="plus-btn" class="icon ion-plus-circled" > Start conversation</i>
+      </ion-item>
       <ion-item ng-repeat="chat in chats.getChats | orderBy:'-lastMessage.timestamp'"
                 class="item-chat item-remove-animate item-avatar item-icon-right"
                 type="item-text-wrap"

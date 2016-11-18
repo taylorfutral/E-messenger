@@ -13,7 +13,9 @@ Meteor.methods({
   userSearch(queryString) {
     //simple search for users, currently searches usernames
     var query = {
-      $where: "this.username.includes('"+queryString+"')"
+      // $where: "this.username.includes('"+queryString+"')"
+      username: queryString
+      //FIXME: Had to change $where to match the exact username instead :/
     };
     var fields = { //limits what the search will return
       username: 1,

@@ -1,10 +1,10 @@
 import { _ } from 'meteor/underscore';
 import { Accounts } from 'meteor/accounts-base';
 import { Controller } from 'angular-ecmascript/module-helpers';
-
+import { Chats } from '../../../lib/collections';
 
 export default class SearchCtrl extends Controller {
-    constructor($scope) {
+    constructor($scope, $window) {
         super(...arguments);
         this.results = [];
         this.$scope = $scope;
@@ -25,6 +25,14 @@ export default class SearchCtrl extends Controller {
             }
             self.$scope.$apply(); //force view update
         });
+    }
+    add_user(user){
+        Chats.insert({
+            name: user.username,
+            picture: user.profile.picture,
+            publicKey: user.profile.publicKey
+        });
+        this.$state.go('tab.chats');
     }
 }
 

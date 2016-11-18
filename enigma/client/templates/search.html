@@ -11,12 +11,14 @@
         <table class="table table-hover">
             <thead ng-if="search.results.length != 0">
                 <tr>
+                    <th>Add?</th>
                     <th>Username</th>
                     <th>Primary Email</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="result in search.results">
+                    <td><i id="plus-btn" class="icon ion-plus-circled" ng-click="search.add_user(result)"></i></td>
                     <td>{{result.username}}</td>
                     <td>{{result.emails[0].address}}</td>
                 </tr>

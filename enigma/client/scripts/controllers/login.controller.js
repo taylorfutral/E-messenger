@@ -20,17 +20,14 @@ export default class LoginCtrl extends Controller {
     }
     register(){ //Create new user account
         if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
-        console.log("hello from the outsiiiiiiiiiide");
         keys = this.createKeys();
+        //FIXME have a field where the suer inputs their actual name
         Accounts.createUser({
             username: this.email,
             email: this.email,
             password: this.password,
             createdAt: new Date(),
-            publicKey: [keys[0], keys[1]],
-            privateKey: [keys[2]],
-            //FIXME: we need some sort of link between this collection and the chats collection!
-            // say this is 'profile.username' for now?
+            //Docs: for reference
             //https://docs.meteor.com/api/accounts.html#Meteor-user
             //Meteor.user() returns the current logged in user collection
             //Meteor.user()._id accesses user id
@@ -40,7 +37,10 @@ export default class LoginCtrl extends Controller {
                 name: this.email,
                 picture: '',
                 //contact dictionary {(key,value)}
-                contacts: {}
+                contacts: {},
+                publicKey: [keys[0], keys[1]],
+                privateKey: [keys[2]]
+
             }
 
         }, (err) => {
