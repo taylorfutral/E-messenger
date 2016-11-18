@@ -15,10 +15,7 @@ export default class RoutesConfig extends Config {
       .state('tab', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'client/templates/tabs.html',
-          resolve: {
-              user: this.isAuthorized
-          }
+        templateUrl: 'client/templates/tabs.html'
       })
       .state('tab.chats', {
         url: '/chats',
@@ -55,10 +52,7 @@ export default class RoutesConfig extends Config {
         .state('search', {
             url: '/search',
             templateUrl: 'client/templates/search.html',
-            controller: 'SearchCtrl as search',
-            resolve: {
-                user: this.isAuthorized
-            }
+            controller: 'SearchCtrl as search'
         });
 
     //Reroutes user to tab/chats

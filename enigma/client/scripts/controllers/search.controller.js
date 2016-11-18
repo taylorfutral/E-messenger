@@ -11,7 +11,7 @@ export default class SearchCtrl extends Controller {
     }
     findUsers() {
         if (_.isEmpty(this.query)) return;
-
+        
         var self = this;
         
         Meteor.call('userSearch', this.query, function(error, response) {
