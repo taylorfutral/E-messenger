@@ -3,6 +3,7 @@
 3. Prototype Document
     - the back button does not work on all chats
     - can still access chats when logged out/previous users chats roll over
+    - encryption is still super jank, low primes and private keys are on mongo
 4. Release 1.0 - make the user guide on the README.md
 5. Come up with tests and things to show the TAs during acceptance test
 6. Final Presentation ppt - we all need to work on this

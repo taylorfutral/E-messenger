@@ -30,7 +30,8 @@ export default class SearchCtrl extends Controller {
         Chats.insert({
             name: user.username,
             picture: user.profile.picture,
-            publicKey: user.profile.publicKey
+            publicKey: user.profile.publicKey,
+            privateKey: user.profile.privateKey
         });
         this.$state.go('tab.chats');
     }
