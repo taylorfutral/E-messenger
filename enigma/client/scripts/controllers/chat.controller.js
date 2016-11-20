@@ -101,6 +101,7 @@ export default class ChatCtrl extends Controller {
     var time = message.timer * 1000;
     Meteor.setTimeout(function() {
       Messages.remove({ _id: message._id });
+      //FIXME: delete the last message from chat as well
     }, time);
 
   }
