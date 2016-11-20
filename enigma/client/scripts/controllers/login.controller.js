@@ -17,17 +17,15 @@ export default class LoginCtrl extends Controller {
     login_btn_clicked(){
         this.$scope.login_btn = true;
         this.$scope.display_top_btns = false;
+        this.$scope.create_btn = false;
     }
 
     create_btn_clicked(){
+        this.$scope.login_btn = false;
         this.$scope.create_btn = true;      
         this.$scope.display_top_btns = false;
     }
 
-    change_control_to_login(){
-      this.$scope.login_btn = true;
-      this.$scope.create_btn = false;
-    }
 
     login(){ //Login in existing user account
         if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
@@ -76,7 +74,7 @@ export default class LoginCtrl extends Controller {
         });
         //redirect to profile page
         //this.$state.go('profile');
-        this.change_control_to_login();
+        this.login_btn_clicked();
     }
 
     handleError(err){

@@ -25,6 +25,7 @@
                     <input type="password" placeholder="Password" ng-model="logger.password" >
                 </label>
                 <button class="btn btn-primary btn-margin-top-10" ng-click="logger.register()">Create Account</button>
+                <button class="btn btn-primary btn-margin-top-10" ng-click="logger.login_btn_clicked()">I want to login instead</button>
             </form>
         </div>
 
@@ -37,6 +38,8 @@
                     <input type="password" placeholder="Password" ng-model="logger.password" >
                 </label>
                 <button class="btn btn-primary btn-margin-top-10" ng-click="logger.login()">Login</button>
+                <button class="btn btn-primary btn-margin-top-10" ng-click="logger.create_btn_clicked()">I want to create account instead</button>
+
             </form>
         </div>
 

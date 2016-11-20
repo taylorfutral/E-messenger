@@ -17,7 +17,7 @@ export default class ChatsCtrl extends Controller {
   }
 
   return_name(chat){
-    return chat.name1 == Meteor.user().username ? chat.name1 : chat.name2;
+    return chat.name1 == Meteor.user().username ? chat.name2 : chat.name1;
   }
  
   remove(chat) {
