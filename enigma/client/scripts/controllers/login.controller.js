@@ -5,6 +5,33 @@ import { Controller } from 'angular-ecmascript/module-helpers';
 
 //Login Controller class
 export default class LoginCtrl extends Controller {
+    constructor($scope){
+        super(...arguments);
+        $scope.login_btn = false;
+        $scope.create_btn = false;
+        $scope.display_top_btns = true;
+        console.log($scope.login_btn);
+
+
+    }
+
+    login_btn_clicked(){
+        this.$scope.login_btn = true;
+        this.$scope.display_top_btns = false;
+    }
+
+    create_btn_clicked(){
+        this.$scope.create_btn = true;      
+        this.$scope.display_top_btns = false;
+    }
+
+    change_control(){
+      console.log("hello");
+      this.$scope.login_btn = true;
+      this.$scope.create_btn = false;      
+
+    }
+
     login(){ //Login in existing user account
         if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
         Meteor.loginWithPassword(this.email, this.password,
@@ -18,12 +45,13 @@ export default class LoginCtrl extends Controller {
         //redirect to tab/chats
         this.$state.go('tab.chats');
     }
+
     register(){ //Create new user account
         if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
         keys = this.createKeys();
         //FIXME have a field where the suer inputs their actual name
         Accounts.createUser({
-            username: this.email,
+            username: this.name,
             email: this.email,
             password: this.password,
             createdAt: new Date(),
@@ -51,7 +79,9 @@ export default class LoginCtrl extends Controller {
         });
         //redirect to profile page
         //this.$state.go('profile');
+        this.change_control();
     }
+
     handleError(err){
         this.$log.error('Login error ', err);
 
@@ -62,6 +92,8 @@ export default class LoginCtrl extends Controller {
         });
     }
 
+    //methods to help encryption
+    //FIXME: move these out of this file and put in methods.js
     createKeys(){
         lowPrimes = [3,5,7,11,13,17,19,23,29,31,37,41,43,47,53,59];//,61,67,71,73,79,83,89,97
                  // ,101,103,107,109,113,127,131,137,139,149,151,157,163,167,173,179

@@ -3,15 +3,42 @@
 
 <ion-view title="ENIGMA - Login">
     <ion-content>
-        <form>
-            <label class="item item-input">
-                <input type="email" placeholder="Email" ng-model="logger.email" >
-            </label>
-            <label class="item item-input">
-                <input type="password" placeholder="Password" ng-model="logger.password" >
-            </label>
-            <button class="btn btn-primary btn-margin-top-10" ng-click="logger.login()">Login</button>
-            <button class="btn btn-primary btn-margin-top-10" ng-click="logger.register()">Create Account</button>
-        </form>
+        <div class="top_btns" ng-if="display_top_btns">
+            <button class="btn btn-primary btn-margin-top-10" ng-click="logger.login_btn_clicked()">
+              Login
+            </button>
+            <button class="btn btn-primary btn-margin-top-10" ng-click="logger.create_btn_clicked()">
+              Create Account
+            </button>
+        </div>
+
+        <div class="create_form" ng-if="create_btn">
+            <form>
+                <!-- normalize the styling -->
+                <label class="item item-input">
+                    <input type="name" placeholder="Name" ng-model="logger.name" >
+                </label>
+                <label class="item item-input">
+                    <input type="email" placeholder="Email" ng-model="logger.email" >
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="Password" ng-model="logger.password" >
+                </label>
+                <button class="btn btn-primary btn-margin-top-10" ng-click="logger.register()">Create Account</button>
+            </form>
+        </div>
+
+        <div class="create_form" ng-if="login_btn">
+            <form>
+                <label class="item item-input">
+                    <input type="email" placeholder="Email" ng-model="logger.email" >
+                </label>
+                <label class="item item-input">
+                    <input type="password" placeholder="Password" ng-model="logger.password" >
+                </label>
+                <button class="btn btn-primary btn-margin-top-10" ng-click="logger.login()">Login</button>
+            </form>
+        </div>
+
     </ion-content>
 </ion-view>
