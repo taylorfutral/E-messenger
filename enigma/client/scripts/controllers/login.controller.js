@@ -10,11 +10,10 @@ export default class LoginCtrl extends Controller {
         $scope.login_btn = false;
         $scope.create_btn = false;
         $scope.display_top_btns = true;
-        console.log($scope.login_btn);
-
 
     }
 
+    // some helper functions for determining which items to display
     login_btn_clicked(){
         this.$scope.login_btn = true;
         this.$scope.display_top_btns = false;
@@ -25,11 +24,9 @@ export default class LoginCtrl extends Controller {
         this.$scope.display_top_btns = false;
     }
 
-    change_control(){
-      console.log("hello");
+    change_control_to_login(){
       this.$scope.login_btn = true;
-      this.$scope.create_btn = false;      
-
+      this.$scope.create_btn = false;
     }
 
     login(){ //Login in existing user account
@@ -79,7 +76,7 @@ export default class LoginCtrl extends Controller {
         });
         //redirect to profile page
         //this.$state.go('profile');
-        this.change_control();
+        this.change_control_to_login();
     }
 
     handleError(err){

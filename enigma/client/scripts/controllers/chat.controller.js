@@ -17,48 +17,44 @@ export default class ChatCtrl extends Controller {
       messages(){
         //when you receive messages you want it to be decoded with your private key
 
+        // FIXME: Below contains the "untested" encryption methods
+
         // need c, d, N
-        other_user = Messages.findOne({userId: {$ne: Meteor.userId()}, chatId: this.chatId});
-        console.log(other_user);
-        console.log(Meteor.userId());
-        console.log(Meteor.user().profile);
-        user_d = Meteor.user().profile.privateKey[0];
-        user_N = Meteor.user().profile.publicKey[0];
-        console.log(user_d);
-        console.log(user_N)
-        if (other_user != null){
-          other_user_d = Chats.findOne({ _id: other_user._id }).privateKey[0];
-          other_user_N = Chats.findOne({ _id: other_user._id }).publicKey[0]
-        }
+        // other_user = Messages.findOne({userId: {$ne: Meteor.userId()}, chatId: this.chatId});
+        // console.log(other_user);
+        // console.log(Meteor.userId());
+        // console.log(Meteor.user().profile);
+        // user_d = Meteor.user().profile.privateKey[0];
+        // user_N = Meteor.user().profile.publicKey[0];
+        // console.log(user_d);
+        // console.log(user_N)
+        // if (other_user != null){
+        //   other_user_d = Chats.findOne({ _id: other_user._id }).privateKey[0];
+        //   other_user_N = Chats.findOne({ _id: other_user._id }).publicKey[0]
+        // }
 
-        mine = [];
-        not_mine = [];
+        // mine = [];
+        // not_mine = [];
 
-        m = Messages.find({chatId: this.chatId});
+        // m = Messages.find({chatId: this.chatId});
 
-        m.forEach(function(item){
-          if (item.userId != Meteor.userId()){
-            not_mine.push(item);
-            // char_arr = this.decrypt_message(item.encrypted_message, other_user_d, other_user_N);
-          }else{
-            mine.push(item);
-            // char_arr = this.decrypt_message(item.encrypted_message, user_d, user_N);
-          }
-        });
-        console.log(mine);
-        console.log(not_mine);
+        // m.forEach(function(item){
+        //   if (item.userId != Meteor.userId()){
+        //     not_mine.push(item);
+        //     // char_arr = this.decrypt_message(item.encrypted_message, other_user_d, other_user_N);
+        //   }else{
+        //     mine.push(item);
+        //     // char_arr = this.decrypt_message(item.encrypted_message, user_d, user_N);
+        //   }
+        // });
+        // console.log(mine);
+        // console.log(not_mine);
 
-        for (i = 0; i < mine.length; i++){
-          console.log(mine[i].encrypted_message)
-          char_arr = this.decrypt_message(mine[i].encrypted_message, user_d, user_N);
-          console.log(char_arr);
-        }
-
-
-
-
-
-
+        // for (i = 0; i < mine.length; i++){
+        //   console.log(mine[i].encrypted_message)
+        //   char_arr = this.decrypt_message(mine[i].encrypted_message, user_d, user_N);
+        //   console.log(char_arr);
+        // }
 
       	return Messages.find({ chatId: this.chatId });
       },
@@ -74,13 +70,13 @@ export default class ChatCtrl extends Controller {
 
     // when you send a message, you want it to be encoded with the sendee's public key
     sendee = Chats.findOne(this.chatId);
-    console.log(sendee);
+    // console.log(sendee);
     // a list where the first element is N and the second element is e
     sendee_public_key= sendee.publicKey;
-    console.log(sendee_public_key);
+    // console.log(sendee_public_key);
     arr = this.convert_message_to_numarr(this.message);
     encrypted_arr = this.encrypt_array(arr, sendee_public_key[0], sendee_public_key[1]);
-    console.log(encrypted_arr);
+    // console.log(encrypted_arr);
 
     this.callMethod('newMessage', {
       text: this.message,

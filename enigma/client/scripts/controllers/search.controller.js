@@ -27,8 +27,10 @@ export default class SearchCtrl extends Controller {
         });
     }
     add_user(user){
+        console.log(user);
         Chats.insert({
-            name: user.username,
+            name1: user.username,
+            name2: Meteor.user().username,
             picture: user.profile.picture,
             publicKey: user.profile.publicKey,
             privateKey: user.profile.privateKey
