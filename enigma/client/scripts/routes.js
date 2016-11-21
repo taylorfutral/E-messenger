@@ -60,9 +60,6 @@ export default class RoutesConfig extends Config {
                     controller: 'SearchCtrl as search'
                 }
 
-            },
-            resolve: {
-                user: this.isAuthorized
             }
         });
 

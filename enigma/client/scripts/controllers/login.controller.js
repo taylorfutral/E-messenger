@@ -13,21 +13,22 @@ export default class LoginCtrl extends Controller {
 
     }
 
-    // some helper functions for determining which items to display
+    //Display Login Form
     login_btn_clicked(){
         this.$scope.login_btn = true;
         this.$scope.display_top_btns = false;
         this.$scope.create_btn = false;
     }
 
+    //Display Register Form
     create_btn_clicked(){
         this.$scope.login_btn = false;
         this.$scope.create_btn = true;      
         this.$scope.display_top_btns = false;
     }
 
-
-    login(){ //Login in existing user account
+    //Login in existing user account
+    login(){
         if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
         Meteor.loginWithPassword(this.email, this.password,
             (err) => {
@@ -37,27 +38,24 @@ export default class LoginCtrl extends Controller {
                 }
             }
         );
+        //clear form fields
+        document.getElementById("login_form").reset();
         //redirect to tab/chats
         this.$state.go('tab.chats');
     }
 
-    register(){ //Create new user account
-        if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
+    //Create new user account
+    register(){
+        if(_.isEmpty(this.email) || _.isEmpty(this.password) || _.isEmpty(this.username)) return;
         keys = this.createKeys();
         //FIXME have a field where the suer inputs their actual name
         Accounts.createUser({
-            username: this.name,
+            username: this.username,
             email: this.email,
             password: this.password,
             createdAt: new Date(),
-            //Docs: for reference
-            //https://docs.meteor.com/api/accounts.html#Meteor-user
-            //Meteor.user() returns the current logged in user collection
-            //Meteor.user()._id accesses user id
-            //Meteor.user().username accesses username
-            //Meteor.user().profile.field accesses specified field in profile collection
             profile: {
-                name: this.email,
+                name: '',
                 picture: '',
                 //contact dictionary {(key,value)}
                 contacts: {},
@@ -65,16 +63,18 @@ export default class LoginCtrl extends Controller {
                 privateKey: [keys[2]]
 
             }
-
         }, (err) => {
             if(err){//failure
                 return this.handleError(err);
             } else {//success
             }
         });
+        //clear form fields
+        document.getElementById("reg_form").reset();
         //redirect to profile page
+        this.$state.go('tab.chats');
         //this.$state.go('profile');
-        this.login_btn_clicked();
+        //this.login_btn_clicked();
     }
 
     handleError(err){
