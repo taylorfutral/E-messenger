@@ -32,14 +32,9 @@ export default class LoginCtrl extends Controller {
         if(_.isEmpty(this.email) || _.isEmpty(this.password)) return;
         Meteor.loginWithPassword(this.email, this.password,
             (err) => {
-                if (err) {
-                    console.log(err.reason);
-                    return this.handleError(err);
-                }
+                if (err) return this.handleError(err);
             }
         );
-        //clear form fields
-        document.getElementById("login_form").reset();
         //redirect to tab/chats
         this.$state.go('tab.chats');
     }
@@ -64,13 +59,8 @@ export default class LoginCtrl extends Controller {
 
             }
         }, (err) => {
-            if(err){//failure
-                return this.handleError(err);
-            } else {//success
-            }
+            if (err) return this.handleError(err);
         });
-        //clear form fields
-        document.getElementById("reg_form").reset();
         //redirect to profile page
         this.$state.go('tab.chats');
         //this.$state.go('profile');
