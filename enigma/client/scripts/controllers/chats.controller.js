@@ -20,6 +20,10 @@ export default class ChatsCtrl extends Controller {
     return chat.name1 == Meteor.user().username ? chat.name2 : chat.name1;
   }
  
+  return_picture(chat){
+    return chat.name1 == Meteor.user().username ? chat.user2_picture : chat.user1_picture;
+  }
+
   remove(chat) {
     Chats.remove(chat._id);
   }

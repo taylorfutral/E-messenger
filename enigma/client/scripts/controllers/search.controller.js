@@ -13,7 +13,7 @@ export default class SearchCtrl extends Controller {
         if (_.isEmpty(this.query)) return;
         
         var self = this;
-        
+
         Meteor.call('userSearch', this.query, function(error, response) {
             if (error) {
                 throw "ERROR: Search utility cannot access server"
@@ -23,21 +23,25 @@ export default class SearchCtrl extends Controller {
                     self.results.push(response[row]);
                 }
             }
+
             self.$scope.$apply(); //force view update
         });
     }
+
+
     add_user(user){
         console.log(user);
         Chats.insert({
             name1: user.username,
             name2: Meteor.user().username,
-            picture: user.profile.picture,
-            publicKey: user.profile.publicKey,
-            privateKey: user.profile.privateKey
+            user1_key: user.profile.key,
+            user2_key: Meteor.user().profile.key,
+            user1_picture: user.profile.picture,
+            user2_picture: Meteor.user().profile.picture
         });
         this.$state.go('tab.chats');
     }
 }
 
 SearchCtrl.$name = 'SearchCtrl';
-SearchCtrl.$inject = ['$state', '$meteor'];
+SearchCtrl.$inject = ['$state', '$ionicLoading', '$ionicPopup', '$log', '$meteor'];

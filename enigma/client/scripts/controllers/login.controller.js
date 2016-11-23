@@ -36,7 +36,7 @@ export default class LoginCtrl extends Controller {
             }
         );
         //redirect to tab/chats
-        this.$state.go('tab.chats');
+        this.$state.go('tab.settings');
     }
 
     //Create new user account
@@ -52,18 +52,15 @@ export default class LoginCtrl extends Controller {
             profile: {
                 name: '',
                 picture: '',
-                //contact dictionary {(key,value)}
                 contacts: {},
-                publicKey: [keys[0], keys[1]],
-                privateKey: [keys[2]]
-
+                key: this.create_random_string()
             }
         }, (err) => {
             if (err) return this.handleError(err);
         });
         //redirect to profile page
-        this.$state.go('profile');
-        //this.login_btn_clicked();
+        // this.$state.go('login');
+        this.login_btn_clicked();
     }
 
     handleError(err){
@@ -74,6 +71,15 @@ export default class LoginCtrl extends Controller {
             template: 'Please try again',
             okType: 'button-positive button-clear'
         });
+    }
+
+    create_random_string(){
+      var text = "";
+      var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for(var i = 0; i < 15; i++){
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+      return text;
     }
 
     //methods to help encryption

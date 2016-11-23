@@ -15,48 +15,38 @@ export default class ChatCtrl extends Controller {
 
     this.helpers({
       messages(){
-        //when you receive messages you want it to be decoded with your private key
-
-        // FIXME: Below contains the "untested" encryption methods
-
-        // need c, d, N
-        // other_user = Messages.findOne({userId: {$ne: Meteor.userId()}, chatId: this.chatId});
-        // console.log(other_user);
-        // console.log(Meteor.userId());
-        // console.log(Meteor.user().profile);
-        // user_d = Meteor.user().profile.privateKey[0];
-        // user_N = Meteor.user().profile.publicKey[0];
-        // console.log(user_d);
-        // console.log(user_N)
-        // if (other_user != null){
-        //   other_user_d = Chats.findOne({ _id: other_user._id }).privateKey[0];
-        //   other_user_N = Chats.findOne({ _id: other_user._id }).publicKey[0]
+        // when you receive messages you want it to be decoded with your private key
+        // c = Chats.findOne(this.chatId);
+        // curr_user_key = "";
+        // other_user_key = "";
+        // if(c.user1_key == Meteor.userId()){
+        //   curr_user_key = c.user1_key;
+        //   other_user_key = c.user2_key;
+        // }else{
+        //   curr_user_key = c.user2_key;
+        //   other_user_key = c.user1_key;
         // }
 
-        // mine = [];
-        // not_mine = [];
 
-        // m = Messages.find({chatId: this.chatId});
 
-        // m.forEach(function(item){
-        //   if (item.userId != Meteor.userId()){
-        //     not_mine.push(item);
-        //     // char_arr = this.decrypt_message(item.encrypted_message, other_user_d, other_user_N);
+        m = Messages.find({ chatId: this.chatId });
+        // m.forEach(function(data){
+        //   if(data.userId == Meteor.userId()){
+        //     decrypted = CryptoJS.AES.decrypt(data.encrypted_message, other_user_key);
+        //     decrypted_message = decrypted.toString(CryptoJS.enc.Utf8);
         //   }else{
-        //     mine.push(item);
-        //     // char_arr = this.decrypt_message(item.encrypted_message, user_d, user_N);
+        //     decrypted = CryptoJS.AES.decrypt(data.encrypted_message, curr_user_key);
+        //     decrypted_message = decrypted.toString(CryptoJS.enc.Utf8);
         //   }
+        //   Messages.update(data._id, { $set: 
+        //     { decrypted_message: decrypted_message },
+        //   });
         // });
-        // console.log(mine);
-        // console.log(not_mine);
 
-        // for (i = 0; i < mine.length; i++){
-        //   console.log(mine[i].encrypted_message)
-        //   char_arr = this.decrypt_message(mine[i].encrypted_message, user_d, user_N);
-        //   console.log(char_arr);
-        // }
 
-      	return Messages.find({ chatId: this.chatId });
+
+
+      	return m;
       },
       data() {
         return Chats.findOne(this.chatId);
@@ -68,19 +58,20 @@ export default class ChatCtrl extends Controller {
   sendMessage(){
     if(_.isEmpty(this.message)) return;
 
-    // when you send a message, you want it to be encoded with the sendee's public key
-    sendee = Chats.findOne(this.chatId);
-    // console.log(sendee);
-    // a list where the first element is N and the second element is e
-    sendee_public_key= sendee.publicKey;
-    // console.log(sendee_public_key);
-    arr = this.convert_message_to_numarr(this.message);
-    encrypted_arr = this.encrypt_array(arr, sendee_public_key[0], sendee_public_key[1]);
-    // console.log(encrypted_arr);
-
+    current_chat = Chats.findOne(this.chatId);
+    other_user_key = "";
+    if(current_chat.name1 == Meteor.user().username){
+      other_user_key = current_chat.user2_key;
+    }else{
+      other_user_key = current_chat.user1_key;
+    }
+    console.log(other_user_key)
+    encrypted = CryptoJS.AES.encrypt(this.message, other_user_key)  ;
+    console.log(encrypted);
     this.callMethod('newMessage', {
       text: this.message,
-      encrypted_message: encrypted_arr,
+      encrypted_message: encrypted.toString(),
+      decrypted_message: "",
       type: 'text',
       chatId: this.chatId,
       userId: Meteor.userId(),

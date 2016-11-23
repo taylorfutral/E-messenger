@@ -50,6 +50,7 @@ Meteor.methods({
     };
     
     var results = Meteor.users.find(query, {'fields': fields});
+    console.log(results);
     return results.fetch();
       }
 
