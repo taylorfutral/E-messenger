@@ -32,10 +32,10 @@ Angular.module(App, [
 new Loader(App)
 	.load(ChatsCtrl)
 	.load(ChatCtrl)
-    .load(InputDirective)
-    .load(LoginCtrl)
-    .load(SettingsCtrl)
-    .load(SearchCtrl)
+  .load(InputDirective)
+  .load(LoginCtrl)
+  .load(SettingsCtrl)
+  .load(SearchCtrl)
 	.load(CalendarFilter)
 	.load(Routes);
 
