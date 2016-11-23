@@ -10,6 +10,18 @@ Meteor.methods({
 
     return messageId;
   },
+
+  updatePicture(data) {
+      if(!this.userId){
+	  throw new Meteor.Error('not-logged-in',
+				 'Must be logged in to update his picture.');
+      }
+
+      check(data, String);
+
+      return Meteor.users.update(this.userId, { $set: { 'profile.picture': data } });
+  },
+
   userSearch(queryString) {
     //simple search for users, currently searches usernames
     var query = {
@@ -25,5 +37,6 @@ Meteor.methods({
     
     var results = Meteor.users.find(query, {'fields': fields});
     return results.fetch();
-  }
+      }
+
 });
