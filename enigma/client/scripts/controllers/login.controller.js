@@ -33,10 +33,12 @@ export default class LoginCtrl extends Controller {
         Meteor.loginWithPassword(this.email, this.password,
             (err) => {
                 if (err) return this.handleError(err);
+                //redirect to tab/chats
+                this.$state.go('tab.chats');
             }
         );
         //redirect to tab/chats
-        this.$state.go('tab.settings');
+        //this.$state.go('tab.chats');
     }
 
     //Create new user account
@@ -57,10 +59,10 @@ export default class LoginCtrl extends Controller {
             }
         }, (err) => {
             if (err) return this.handleError(err);
+            //redirect to profile page
+            this.$state.go('profile');
         });
-        //redirect to profile page
-        // this.$state.go('login');
-        this.login_btn_clicked();
+
     }
 
     handleError(err){
