@@ -30,9 +30,15 @@ export default class ProfileCtrl extends Controller {
 
         this.callMethod('updateName', this.name, (err) => {
             if (err) return this.handleError(err);
-            this.$state.go('tab.chats');
+        });
+        this.$ionicPopup.alert({
+            title: 'Name Saved',
+            template: this.name + ' saved',
+            okType: 'button-positive button-clear'
         });
     }
+
+    gotoSettings(){ this.$state.go('tab.settings'); }
 
     handleError(err) {
         if (err.error == 'cancel') return;

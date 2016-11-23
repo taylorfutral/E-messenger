@@ -1,6 +1,6 @@
 <ion-view title="ENIGMA - Profile">
   <ion-nav-buttons side="right">
-    <button ng-click="profile.updateName()" ng-disabled="!profile.name || profile.name.length === 0" class="button button-clear button-positive">Done</button>
+    <button ng-click="profile.gotoSettings()" class="button button-clear button-positive">Settings</button>
   </ion-nav-buttons>
 
   <ion-content class="profile">
@@ -21,7 +21,8 @@
     <div class="list profile-name">
       <label class="item item-input">
         <input ng-model="profile.name" on-return="profile.updateName()" type="text" placeholder="Your name">
-      </label>
+
+      </label><button class="btn btn-primary" ng-click="profile.updateName()" ng-disabled="!profile.name || profile.name.length === 0">Save</button>
     </div>
   </ion-content>
 </ion-view>
