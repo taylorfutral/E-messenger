@@ -62,8 +62,7 @@ export default class LoginCtrl extends Controller {
             if (err) return this.handleError(err);
         });
         //redirect to profile page
-        this.$state.go('tab.chats');
-        //this.$state.go('profile');
+        this.$state.go('profile');
         //this.login_btn_clicked();
     }
 

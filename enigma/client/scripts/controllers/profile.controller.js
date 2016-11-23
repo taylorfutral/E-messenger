@@ -11,18 +11,39 @@ export default class ProfileCtrl extends Controller {
     }
 
     updatePicture() {
-	MeteorCameraUI.getPicture({ width: 60, height: 60 }, (err, data) => {
-	    if (err) return this.handleError(err);
-	    
-	    this.$ionicLoading.show({
-		    template: 'Updating picture...'
-	    });
+		MeteorCameraUI.getPicture({ width: 100, height: 100 }, (err, data) => {
+			if (err) return this.handleError(err);
 
-	    this.callMethod('updatePicture', data, (err) => {
-		    this.$ionicLoading.hide();
-		    this.handleError(err);
+			this.$ionicLoading.show({
+				template: 'Updating picture...'
+			});
+
+			this.callMethod('updatePicture', data, (err) => {
+				this.$ionicLoading.hide();
+				this.handleError(err);
+			});
 		});
-	});
+	}
+
+    updateName() {
+        if (_.isEmpty(this.name)) return;
+
+        this.callMethod('updateName', this.name, (err) => {
+            if (err) return this.handleError(err);
+            this.$state.go('tab.chats');
+        });
+    }
+
+    handleError(err) {
+        if (err.error == 'cancel') return;
+        this.$log.error('Profile save error ', err);
+
+        this.$ionicPopup.alert({
+            title: err.reason || 'Save failed',
+            template: 'Please try again',
+            okType: 'button-positive button-clear'
+        });
+    }
 }
 
-}
+ProfileCtrl.$inject = ['$state', '$ionicLoading', '$ionicPopup', '$log'];

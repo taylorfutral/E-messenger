@@ -43,14 +43,14 @@ export default class RoutesConfig extends Config {
             templateUrl: 'client/templates/login.html',
             controller: 'LoginCtrl as logger'
         })
-	.state('profile',{
-		url: '/profile',
-		    templateUrl: 'client/templates/profile.html',
-		    controller: 'ProfileCtrl as profile',
-		    resolve: {
-		          user: this.isAuthorized
-			}
-	})
+        .state('profile',{
+            url: '/profile',
+                templateUrl: 'client/templates/profile.html',
+                controller: 'ProfileCtrl as profile',
+                resolve: {
+                      user: this.isAuthorized
+                }
+        })
         .state('tab.settings',{
             url: '/settings',
             views: {

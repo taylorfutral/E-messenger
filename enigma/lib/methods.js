@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import { Chats, Messages } from '../lib/collections';
  
 Meteor.methods({
@@ -21,7 +22,20 @@ Meteor.methods({
 
       return Meteor.users.update(this.userId, { $set: { 'profile.picture': data } });
   },
+    updateName(name) {
+        if (!this.userId) {
+            throw new Meteor.Error('not-logged-in',
+                'Must be logged in to update his name.');
+        }
 
+        check(name, String);
+
+        if (name.length === 0) {
+            throw Meteor.Error('name-required', 'Must provide a user name');
+        }
+
+        return Meteor.users.update(this.userId, { $set: { 'profile.name': name } });
+    },
   userSearch(queryString) {
     //simple search for users, currently searches usernames
     var query = {

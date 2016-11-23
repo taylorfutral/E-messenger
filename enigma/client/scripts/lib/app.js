@@ -18,6 +18,7 @@ import CalendarFilter from '../filters/calendar.filter';
 import LoginCtrl from '../controllers/login.controller';
 import SettingsCtrl from '../controllers/settings.controller';
 import SearchCtrl from '../controllers/search.controller';
+import ProfileCtrl from '../controllers/profile.controller';
 import Routes from '../routes';
  
 const App = 'ENIGMA';
@@ -36,6 +37,7 @@ new Loader(App)
   .load(LoginCtrl)
   .load(SettingsCtrl)
   .load(SearchCtrl)
+    .load(ProfileCtrl)
 	.load(CalendarFilter)
 	.load(Routes);
 
