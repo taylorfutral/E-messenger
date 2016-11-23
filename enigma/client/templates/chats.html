@@ -5,17 +5,17 @@
 
   <ion-content>
      <ion-list>
-                                              <!-- VVV can use "ng-click="chats.*some_function()"" here -->
-      <i id="plus-btn" class="icon ion-plus-circled"> Start conversation</i>
+     <ion-item href="#/tab/search">
+      <i id="plus-btn" class="icon ion-plus-circled" > Start conversation</i>
+      </ion-item>
       <ion-item ng-repeat="chat in chats.getChats | orderBy:'-lastMessage.timestamp'"
                 class="item-chat item-remove-animate item-avatar item-icon-right"
                 type="item-text-wrap"
                 href="#/tab/chats/{{ chat._id }}">
         <img ng-src="{{ chat.picture }}">
-        <h2>{{ chat.name }}</h2>
+        <h2>{{ chats.return_name(chat) }}</h2>
         <p>{{ chat.lastMessage.text }}</p>
         <span class="last-message-timestamp">{{ chat.lastMessage.timestamp | calendar}}</span>
-        <!-- wtf is calendar doing -->
         <i class="icon ion-chevron-right icon-accessory"></i>
         <ion-option-button class="button-assertive" ng-click="chats.remove(chat)">
           Delete

@@ -10,7 +10,6 @@ Meteor.methods({
 
     return messageId;
   },
-  
 
   updatePicture(data) {
       if(!this.userId){
@@ -21,6 +20,23 @@ Meteor.methods({
       check(data, String);
 
       return Meteor.users.update(this.userId, { $set: { 'profile.picture': data } });
-  }
+  },
+
+  userSearch(queryString) {
+    //simple search for users, currently searches usernames
+    var query = {
+      // $where: "this.username.includes('"+queryString+"')"
+      username: queryString
+      //FIXME: Had to change $where to match the exact username instead :/
+    };
+    var fields = { //limits what the search will return
+      username: 1,
+      emails: 1,
+      profile: 1
+    };
+    
+    var results = Meteor.users.find(query, {'fields': fields});
+    return results.fetch();
+      }
 
 });

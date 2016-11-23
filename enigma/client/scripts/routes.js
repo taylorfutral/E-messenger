@@ -15,7 +15,10 @@ export default class RoutesConfig extends Config {
       .state('tab', {
         url: '/tab',
         abstract: true,
-        templateUrl: 'client/templates/tabs.html'
+        templateUrl: 'client/templates/tabs.html',
+          resolve: {
+            user: this.isAuthorized
+          }
       })
       .state('tab.chats', {
         url: '/chats',
@@ -45,8 +48,18 @@ export default class RoutesConfig extends Config {
             views: {
                 'tab-settings': {
                     templateUrl: 'client/templates/settings.html',
-                    controller: 'SettingsCtrl as settings',
+                    controller: 'SettingsCtrl as settings'
                 }
+            }
+        })
+        .state('tab.search', {
+            url: '/search',
+            views: {
+                'tab-search': {
+                    templateUrl: 'client/templates/search.html',
+                    controller: 'SearchCtrl as search'
+                }
+
             }
         });
 

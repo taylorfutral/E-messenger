@@ -9,9 +9,15 @@ export default class ChatsCtrl extends Controller {
  
     this.helpers({
       getChats() {
-        return Chats.find();
+        current_user = Meteor.user().username;
+        return Chats.find({ $or: [ { name1: current_user }, 
+                                   { name2: current_user }]});
       }
     });
+  }
+
+  return_name(chat){
+    return chat.name1 == Meteor.user().username ? chat.name2 : chat.name1;
   }
  
   remove(chat) {

@@ -17,6 +17,7 @@ import InputDirective from '../directives/input.directive';
 import CalendarFilter from '../filters/calendar.filter';
 import LoginCtrl from '../controllers/login.controller';
 import SettingsCtrl from '../controllers/settings.controller';
+import SearchCtrl from '../controllers/search.controller';
 import Routes from '../routes';
  
 const App = 'ENIGMA';
@@ -25,7 +26,6 @@ Angular.module(App, [
     'angular-meteor',
     'angular-meteor.auth',
     'angularMoment',
-    'accounts.ui',
     'ionic'
 ]);
 
@@ -35,6 +35,7 @@ new Loader(App)
     .load(InputDirective)
     .load(LoginCtrl)
     .load(SettingsCtrl)
+    .load(SearchCtrl)
 	.load(CalendarFilter)
 	.load(Routes);
 
