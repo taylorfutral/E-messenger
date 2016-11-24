@@ -59,8 +59,8 @@ export default class LoginCtrl extends Controller {
             }
         }, (err) => {
             if (err) return this.handleError(err);
-            //redirect to profile page
-            this.$state.go('profile');
+            //redirect to chats page
+            this.$state.go('tab.chats');
         });
 
     }
