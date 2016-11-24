@@ -30,7 +30,6 @@ export default class SearchCtrl extends Controller {
 
 
     add_user(user){
-        console.log(user);
         Chats.insert({
             name1: user.username,
             name2: Meteor.user().username,

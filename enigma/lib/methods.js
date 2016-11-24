@@ -40,8 +40,6 @@ Meteor.methods({
     //simple search for users, currently searches usernames
     var query = {
       $where: "this.username.includes('"+queryString+"')"
-      // username: queryString
-      //FIXME: Had to change $where to match the exact username instead :/
     };
     var fields = { //limits what the search will return
       username: 1,
@@ -50,8 +48,7 @@ Meteor.methods({
     };
     
     var results = Meteor.users.find(query, {'fields': fields});
-    console.log(results);
     return results.fetch();
-      }
+  }
 
 });
